@@ -16,6 +16,10 @@
             <input class="border py-2 px-3 text-gray-500" type="password" name="password" id="password">
           </div>
           <button class="block bg-teal hover:bg-teal-dark uppercase text-md mx-auto p-4 rounded" type="submit">Sign in</button>
+          <div class="flex items-center">
+            <input  class="mr-2" type="checkbox" name="remember" id="">
+            <label for="remember">Remember me</label>
+          </div>
         </form>
       </div>
     </div>

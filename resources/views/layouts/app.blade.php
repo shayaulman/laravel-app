@@ -16,7 +16,7 @@
         <a href="">Home</a>
       </li>
       <li class="m-3">
-        <a href="">Dashboard</a>
+        <a href="/dashboard">Dashboard</a>
       </li>
       <li class="m-3">
         <a href="">Post</a>
