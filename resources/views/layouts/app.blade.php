@@ -22,14 +22,25 @@
         <a href="">Post</a>
     </ul>
     <ul class="flex items-center">
+      @auth
       <li class="m-3">
-        <a href="">Name</a>
+        <a href="">{{auth()->user()->name}}</a>
       </li>
       <li class="m-3">
-        <a href="">Login</a>
+        <form action="{{route('logout')}}" method="post">
+          @csrf
+         <button>Logout</button>
+        </form>
+      </li>
+      @endauth
+      @guest
+      <li class="m-3">
+        <a href="/login">Login</a>
       </li>
       <li class="m-3">
-        <a href="">Logout</a>
+        <a href="/register">Register</a>
+      </li>
+      @endguest
     </ul>
   </nav>
   @yield('content')
