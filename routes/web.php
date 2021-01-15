@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +27,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
   ->name('dashboard')
   ->middleware('auth');
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register')
-  ->middleware('guest ');
+Route::get('/register', [RegisterController::class, 'index'])
+  ->name('register')
+  ->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])
@@ -34,7 +37,14 @@ Route::get('/login', [LoginController::class, 'index'])
   ->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'store'])
+  ->name('logout');
+
+Route::get('/posts', [PostController::class, 'index'])
+  ->name('posts')
+  ->middleware('auth');
+Route::post('/posts', [PostController::class, 'store']);
+
 
 Route::get('/post', function () {
     return view('posts.index');
