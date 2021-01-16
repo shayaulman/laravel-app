@@ -19,7 +19,7 @@
         <a href="/dashboard">Dashboard</a>
       </li>
       <li class="m-3">
-        <a href="/posts">Submit A Post</a>
+        <a href="/posts">Posts</a>
     </ul>
     <ul class="flex items-center">
       @auth
