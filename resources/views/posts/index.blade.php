@@ -1,20 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="m-4 p-12 bg-white border-rounded">
-  <form class="mx-auto max-w-screen-md m-6 border-gray-600 rounded-md" action="{{route('posts')}}" method="post">
-    @csrf
-    <textarea class="w-full h-48 border-2 border-gray-700 rounded" name="body"></textarea>
-    <button class="block my-2 mx-auto py-2 px-6 bg-blue-600 text-white rounded" type="submit">Submit</button>
-  </form>
+<form class="my-12 mx-auto w-96 rounded-md" action="{{route('posts')}}" method="post">
+  @csrf
+  <textarea class="w-full h-48 border border-gray-200 rounded-md" name="body"></textarea>
+  <button class="block ml-auto my-2 py-2 px-6 bg-blue-600 text-white rounded" type="submit">Submit</button>
+</form>
+<div class="m-8 grid grid-cols-3 gap-6">
   @foreach($posts as $post)
-  <div>{{$post->user->name}}</div>
-  <div>{{$post->body}}</div>
-  <div>{{$post->created_at->diffForHumans()}}</div>
+  <div class="w-64 p-6 bg-gray-50 rounded">
+    <div class="text-sm">
+      <span class="my-2 text-gray-600">{{$post->user->name}}</span>
+      <span class="ml-auto text-gray-400 font-light">{{$post->created_at->diffForHumans()}}</span>
+    </div>
+    <div class="my-4 font-sans text-gray-800">{{$post->body}}</div>
+  </div>
   @endforeach
-  @error('body')
-  <p>{{ $message}}</p>
-  @enderror
-  {{$posts->links()}}
 </div>
+@error('body')
+<p>{{ $message}}</p>
+@enderror
+{{$posts->links()}}
 @endsection
