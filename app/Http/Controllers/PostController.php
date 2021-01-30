@@ -7,24 +7,34 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index ()
+    public function index()
     {
-      $posts = Post::orderBy('created_at', 'desc')->paginate(20);
-      return view('posts.index', [
-        'posts' => $posts
-      ]);
+        $posts = Post::latest()->with(['user', 'likes'])->paginate(20);
+        return view('posts.index', [
+            'posts' => $posts
+        ]);
     }
 
     public function store(Request $request)
     {
-      $this->validate($request, [
-        'body' => 'required'
-      ]);
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
 
-      auth()->user()->posts()->create([
-        'body' => $request->body
-      ]);
+        auth()->user()->posts()->create([
+            'body' => $request->body
+        ]);
 
-      return back();
+        return back();
+    }
+
+
+    public function destroy(Post $post)
+    {
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return back();
     }
 }

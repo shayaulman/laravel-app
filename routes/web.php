@@ -20,36 +20,39 @@ use App\Http\Controllers\PostLikeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-  return view('home');
+
+Route::get('/', function () {
+    return view('home');
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-  ->name('dashboard')
-  ->middleware('auth');
+    ->name('dashboard')
+    ->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'index'])
-  ->name('register')
-  ->middleware('guest');
+    ->name('register')
+    ->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])
-  ->name('login')
-  ->middleware('guest');
+    ->name('login')
+    ->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::post('/logout', [LogoutController::class, 'store'])
-  ->name('logout');
+    ->name('logout');
 
 Route::get('/posts', [PostController::class, 'index'])
-  ->name('posts')
-  ->middleware('auth');
+    ->name('posts')
+    ->middleware('auth');
 Route::post('/posts', [PostController::class, 'store']);
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])
+    ->name('posts.destroy');
 
 Route::post('/posts/{post}/like', [PostLikeController::class, 'store'])
-->name('posts.likes');
+    ->name('posts.likes');
 Route::delete('/posts/{post}/like', [PostLikeController::class, 'destroy'])
-->name('posts.likes');
+    ->name('posts.likes');
 
 Route::get('/post', function () {
     return view('posts.index');
