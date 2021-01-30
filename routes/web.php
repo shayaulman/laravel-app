@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 
 
 /*
@@ -45,6 +46,10 @@ Route::get('/posts', [PostController::class, 'index'])
   ->middleware('auth');
 Route::post('/posts', [PostController::class, 'store']);
 
+Route::post('/posts/{post}/like', [PostLikeController::class, 'store'])
+->name('posts.likes');
+Route::delete('/posts/{post}/like', [PostLikeController::class, 'destroy'])
+->name('posts.likes');
 
 Route::get('/post', function () {
     return view('posts.index');

@@ -14,6 +14,25 @@
       <span class="ml-auto text-gray-400 font-light">{{$post->created_at->diffForHumans()}}</span>
     </div>
     <div class="my-4 font-sans text-gray-800">{{$post->body}}</div>
+    <div>
+      <div class="flex">
+        @if (!$post->likedBy(auth()->user()))
+        <form class="my-12 mx-auto w-96 rounded-md" action="{{route('posts.likes', $post->id)}}" method="post">
+          @csrf
+          <button class="text-blue-600" type="submit">Like</button>
+        </form>
+        @else
+        <form class="my-12 mx-auto w-96 rounded-md" action="{{route('posts.likes', $post->id)}}" method="post">
+          @csrf
+          @method('DELETE')
+          <button class="text-blue-600" type="submit">Dislike</button>
+        </form>
+        @endif
+        <div>
+          {{$post->likes->count()}} {{Str::plural('like', $post->likes->count())}}
+        </div>
+      </div>
+    </div>
   </div>
   @endforeach
 </div>
