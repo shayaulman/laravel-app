@@ -10,6 +10,7 @@
     @foreach($posts as $post)
     <x-post :post="$post" />
     @endforeach
+    {{$posts->links()}}
 </div>
 @error('body')
 <p>{{ $message}}</p>

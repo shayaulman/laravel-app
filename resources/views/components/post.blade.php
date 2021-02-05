@@ -1,9 +1,9 @@
 @props(['post' => $post])
 
+
 <div>
     <div class="w-64 p-6 bg-gray-50 rounded">
         <div class="text-sm">
-            {{$post->user->id}}
             <a href="{{route('users.posts', $post->user)}}">
                 <span class="my-2 text-gray-600">{{$post->user->name}}</span>
                 <span class="ml-auto text-gray-400 font-light">{{$post->created_at->diffForHumans()}}</span>
@@ -17,6 +17,7 @@
             <button>Delete</button>
         </form>
         @endcan
+        <a href={{route('posts.show', $post)}}>Show</a>
         <div>
             <div class="flex">
                 @if (!$post->likedBy(auth()->user()))
