@@ -8,6 +8,7 @@
         {{$user->likesRecieved->count()}} {{Str::plural('like', $user->likesRecieved->count())}}
     </p>
 </div>
+
 @foreach ($posts as $post)
 <x-post :post="$post" />
 @endforeach
